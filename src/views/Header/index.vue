@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -19,6 +20,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["addTodo"]),
     addTodo() {
       if (this.todo.trim() === "") {
         this.todo = "";

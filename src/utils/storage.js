@@ -7,7 +7,7 @@ export function setLocal(key, val) {
 }
 
 // 获取本地数据
-export function getLocal() {
+export function getLocal(key) {
   const data = localStorage.getItem(key);
   try {
     data = JSON.parse(data);

@@ -24,6 +24,7 @@
 import Header from "@/views/Header";
 import Main from "@/views/Main";
 import Footer from "@/views/Footer";
+import { mapState } from "vuex";
 export default {
   components: {
     Header,
@@ -35,8 +36,20 @@ export default {
       // todos: ["吃饭", "睡觉", "写代码"],
     };
   },
-
+  computed: {
+    ...mapState(["todos"]),
+  },
   methods: {},
+  watch: {
+    todos: {
+      deep: true,
+      immediate: true,
+      handler(newList) {
+        this.$store.commit("jianting", newList);
+        // localStorage.setItem("todokey", JSON.stringify(newList));
+      },
+    },
+  },
 };
 </script>
 

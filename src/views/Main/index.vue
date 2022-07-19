@@ -3,7 +3,7 @@
     <input class="toggle-all" id="toggle-all" type="checkbox" v-model="isAll" />
     <label for="toggle-all"></label>
     <ul class="todo-list">
-      <li class="todo" v-for="(item, index) in todos" :key="index">
+      <li class="todo" v-for="(item, index) in showList" :key="index">
         <div class="view">
           <input class="toggle" type="checkbox" v-model="item.isDone" />
           <label @dblclick="editTodo(item)">{{ item.name }}</label>
@@ -32,7 +32,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["todos"]),
+    ...mapState(["todos", "select"]),
     isAll: {
       set(checkbox) {
         this.todos.forEach((item) => (item.isDone = checkbox));
@@ -40,6 +40,18 @@ export default {
       get() {
         return this.todos.every((item) => item.isDone === true);
       },
+    },
+    showList() {
+      switch (this.select) {
+        case "全部":
+          return this.todos;
+        case "未完成":
+          return this.todos.filter((item) => !item.isDone);
+        case "已完成":
+          return this.todos.filter((item) => item.isDone);
+        default:
+          return [];
+      }
     },
   },
   methods: {
