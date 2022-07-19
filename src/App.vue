@@ -1,68 +1,15 @@
 <template>
   <div>
     <section class="todoapp">
-      <header class="header">
-        <h1>todos</h1>
-        <input
-          class="new-todo"
-          placeholder="准备做什么？"
-          autofocus
-          v-model="todo"
-          @keyup.enter="addTodo"
-        />
-      </header>
+      <!-- 头部 -->
+      <Header></Header>
+      <!-- 列表 -->
       <section class="main">
-        <input class="toggle-all" id="toggle-all" type="checkbox" />
-        <label for="toggle-all">Mark all as complete</label>
-        <ul class="todo-list">
-          <li class="todo" v-for="(item, index) in todos" :key="index">
-            <div class="view">
-              <input class="toggle" type="checkbox" v-model="changeTodo" />
-              <label @dblclick="editTodo(item)">{{ item }}</label>
-              <button class="destroy" @click="removeTodo(item)"></button>
-            </div>
-            <input
-              class="edit"
-              type="text"
-              v-model="todo.title"
-              v-todo-focus="todo == editedTodo"
-              @blur="doneEdit(todo)"
-              @keyup.enter="doneEdit(todo)"
-              @keyup.esc="cancelEdit(todo)"
-            />
-          </li>
-        </ul>
+        <Main></Main>
       </section>
+      <!-- 尾部 -->
       <footer class="footer">
-        <span class="todo-count">
-          <strong v-text="remaining"></strong> 3条未完成
-        </span>
-        <ul class="filters">
-          <li>
-            <a href="#/all" :class="{ selected: visibility == 'all' }"
-              >全部清单</a
-            >
-          </li>
-          <li>
-            <a href="#/active" :class="{ selected: visibility == 'active' }"
-              >未完成</a
-            >
-          </li>
-          <li>
-            <a
-              href="#/completed"
-              :class="{ selected: visibility == 'completed' }"
-              >已完成</a
-            >
-          </li>
-        </ul>
-        <button
-          class="clear-completed"
-          @click="removeCompleted"
-          v-show="todos.length > remaining"
-        >
-          Clear completed
-        </button>
+        <Footer></Footer>
       </footer>
     </section>
     <footer class="info">
@@ -74,30 +21,22 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex';
+import Header from "@/views/Header";
+import Main from "@/views/Main";
+import Footer from "@/views/Footer";
 export default {
+  components: {
+    Header,
+    Main,
+    Footer,
+  },
   data() {
     return {
-      todos: ["吃饭", "睡觉", "写代码"],
-      todo: "",
-      changeTodo: "",
+      // todos: ["吃饭", "睡觉", "写代码"],
     };
   },
-  computed: {
-    // ...mapState(['todos'])
-  },
-  methods: {
-    addTodo() {
-      // this.$store.commit('addTodo',this.todo)
-      // const todo = {
-      //   this.todo
-      // }
-      this.todos.push(this.todo);
-    },
-  },
-  watch: {
-    todos: {},
-  },
+
+  methods: {},
 };
 </script>
 
